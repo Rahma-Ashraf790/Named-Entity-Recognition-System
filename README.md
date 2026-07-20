@@ -1,43 +1,39 @@
-# Named Entity Recognition System
+Named Entity Recognition System
 
-A comparative study and implementation of multiple deep learning architectures for Named Entity Recognition (NER), progressing from simple recurrent models to a fine-tuned transformer.
+A deep learning system that identifies and classifies named entities in text (such as persons, organizations, and locations). The project includes a complete training pipeline comparing multiple sequence labeling architectures, from recurrent networks to a fine-tuned transformer.
 
-## Overview
+Project Goal
 
-This project implements and benchmarks four different approaches to Named Entity Recognition, evaluating how model architecture impacts sequence labeling performance:
+The goal of this project is to compare several deep learning architectures for Named Entity Recognition and identify the best-performing approach.
 
-1. **LSTM** — a baseline unidirectional recurrent model
-2. **BiLSTM** — bidirectional LSTM to capture both past and future context
-3. **BiLSTM + CRF** — bidirectional LSTM with a Conditional Random Field layer to model label dependencies
-4. **Fine-tuned Transformer** — a pretrained transformer model fine-tuned for token classification
+Four models were trained and evaluated:
 
-The fine-tuned transformer achieved the best overall performance, outperforming all recurrent-based architectures.
+Model	Type	Notes
+LSTM	Trained from scratch	Unidirectional recurrent baseline, processes tokens using only past context
+BiLSTM	Trained from scratch	Bidirectional recurrent model, captures both past and future context
+BiLSTM + CRF	Trained from scratch	BiLSTM with a CRF layer on top to model dependencies between adjacent tags
+Fine-tuned Transformer	Transfer learning	Pretrained transformer fine-tuned for token classification — best performing model
 
-**Key finding:** The fine-tuned transformer outperformed all other architectures, benefiting from pretrained contextual representations that the LSTM-based models could not match even with bidirectionality and CRF-based label modeling.
+Highlights
 
-## Project Structure
+Data preparation: The dataset was split into training, validation, and test sets before preprocessing, with tokens tagged in BIO format.
+Model comparison: Models were evaluated on precision, recall, and F1-score, both overall and per entity type.
+Progressive architecture study: Each model builds on the limitations of the previous one — from a unidirectional LSTM, to bidirectional context (BiLSTM), to structured label prediction (BiLSTM + CRF), to contextual pretrained representations (fine-tuned transformer).
+Best model: The fine-tuned transformer achieved the strongest results across all metrics and entity types.
 
-```
-├── NER System.ipynb                   
-├── best_model/
-│   ├── config.json
-│   ├── label_mapping.json
-│   ├── model.savetensors
-│   ├── tokenizer_config.json
-│   └── tokenizer.json
+Project Structure
+
+├── NER System.ipynb                         
+├── main.py                           
 └── README.md
-```
 
-## How to Run
+Built With
 
-```bash
-python main.py
+PyTorch — model building & training
+Hugging Face Transformers — pretrained transformer backbone & fine-tuning
+torchcrf / pytorch-crf — CRF layer for the BiLSTM + CRF model
+NumPy, Pandas, Matplotlib, Seaborn — data processing & visualization
 
-```
+Results
 
-## Future Work
-
-- Experiment with additional pretrained transformer backbones
-- Domain adaptation to specialized text (e.g., medical, legal)
-- Error analysis on misclassified entity spans
-- Deployment as an API for real-time NER inference
+The fine-tuned transformer outperformed the LSTM, BiLSTM, and BiLSTM + CRF models, benefiting from pretrained contextual representations that the recurrent-based architectures could not match even with bidirectionality and CRF-based label modeling.
