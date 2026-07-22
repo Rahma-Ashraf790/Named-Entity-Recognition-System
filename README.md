@@ -37,6 +37,13 @@ Four models were trained and evaluated:
 - torchcrf / pytorch-crf — CRF layer for the BiLSTM + CRF model
 - NumPy, Pandas, Matplotlib, Seaborn — data processing & visualization
 
+## Quick Start
+
+```bash
+pip install tensorflow transformers scikit-learn pandas numpy
+python main.py
+```
+
 ## Results
 
 The fine-tuned transformer outperformed the LSTM, BiLSTM, and BiLSTM + CRF models, benefiting from pretrained contextual representations that the recurrent-based architectures could not match even with bidirectionality and CRF-based label modeling.
