@@ -32,7 +32,7 @@ Four models were trained and evaluated:
 
 ## Built With
 
-- PyTorch — model building & training
+- Tensorflow/Keras — model building & training
 - Hugging Face Transformers — pretrained transformer backbone & fine-tuning
 - torchcrf / pytorch-crf — CRF layer for the BiLSTM + CRF model
 - NumPy, Pandas, Matplotlib, Seaborn — data processing & visualization
